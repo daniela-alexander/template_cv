@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: "Nunito", sans-serif;
+}
+
+.main{
+    display: flex;
+    width: 600px;
+    height: 800px;
+    border: grey solid 2px;
+    margin: 0 400px 0; 
+}
+
+.foto_cv{
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    border: #CE9CB3 solid 2px;
+}
+
+.columna-izquierda{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    height: 100%;
+    background-color: #FFF1F2;
+    justify-content: space-around;
+    padding-left: 15px;
+}
+
+.columna-derecha{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 60%;
+    height: 100%;
+    padding-left: 20px;;
+}
+
+.data{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    list-style: none;
+    
+}
+
+.img_contacto{
+    width: 20px;
+    height: 20px;
+}
+
+.sobre_mi{
+    text-align: justify;
+    font-size: 13px;
+    width: 80%;
+}
+
+.habilidades{
+    list-style: none;
+}
+  
+.duracion{
+    float: right;
+    padding-right: 15px;
+}
+
+.tarjeta_educacion{
+    margin-top: 50px;
+    padding: 20px;
+}
+
+.tarjeta_exp{
+    margin-top: 20px;
+    padding: 20px;
+}
+
