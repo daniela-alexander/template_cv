@@ -32,24 +32,28 @@ body{
     width: 40%;
     height: 100%;
     background-color: #FFF1F2;
-    justify-content: space-around;
     padding-left: 15px;
+    padding-top: 20px;
 }
 
 .columna-derecha{
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
     width: 60%;
     height: 100%;
-    padding-left: 20px;;
+    padding: 20px;
+}
+
+.presentacion{
+    margin-top: 20%;
 }
 
 .data{
     display: flex;
     flex-direction: column;
-    justify-content: left;
     list-style: none;
+    gap: 30px;
+    margin-top: 50%;
     
 }
 
@@ -58,28 +62,30 @@ body{
     height: 20px;
 }
 
-.sobre_mi{
-    text-align: justify;
-    font-size: 13px;
-    width: 80%;
-}
-
-.habilidades{
-    list-style: none;
-}
-  
 .duracion{
     float: right;
     padding-right: 15px;
 }
 
-.tarjeta_educacion{
-    margin-top: 50px;
-    padding: 20px;
+.hidden {
+    display: none !important;
 }
 
-.tarjeta_exp{
-    margin-top: 20px;
-    padding: 20px;
+#contenido {
+    display: flex;
+    margin-top: 50%;
 }
 
+.boton_info{
+    text-decoration: none;
+    color: #ab8295;
+    font-size: 1.3rem;
+}
+
+.boton_info:hover{
+    color: #cb6096;
+}
+
+.active{
+    color: #b7256e;
+}
