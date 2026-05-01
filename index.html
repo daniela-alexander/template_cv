@@ -4,14 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Template CV</title>
+    <title>CV - {{ cv.personal_info.nombre }} {{ cv.personal_info.apellidos }}</title>
     <link rel="stylesheet" href="./assets/css/estilos.css">
 </head>
 
 <body>
     <main class="main">
         <div class="columna-izquierda">
-            <img class="foto_cv" src="./assets/img/mujer_cv.jpg" alt="mujer cruzada de brazos sonriendo">
+            {% if cv.personal_info.foto %}
+            <img class="foto_cv" src="{{ cv.personal_info.foto }}">
+            {% endif %}
 
             <ul class="data">
                 <li><a href="#" class="boton_info" data-target="datos_personales">Datos personales</a></li>
@@ -25,68 +27,113 @@
 
         <div class="columna-derecha">
             <div class="presentacion">
-                <h1 class="nombre">Nombre y apellidos</h1>
-                <h4 class="profesion">Lorem, ipsum dolor.</h4>
+                <h1 class="nombre">{{ cv.personal_info.nombre }} {{ cv.personal_info.apellidos }}</h1>
+                <h4 class="profesion">{{ cv.professional_profile.profesion }}</h4>
             </div>
 
             <div id="contenido">
                 <ul class="info-container hidden" id="datos_personales">
-                    <li> <img class="img_contacto" src="./assets/img/telefono.png" alt="icono teléfono">número</li>
-                    <!--{% if email_profesional2 %}-->
-                    <li> <img class="img_contacto" src="./assets/img/email.png" alt="icono email">
-                        <!--{{ email_profesional2 }}--->email</li>
-                    <!--{% endif %}-->
-                    <li> <img class="img_contacto" src="./assets/img/web.png" alt="icono web"> sitio web</li>
-                    <li> <img class="img_contacto" src="./assets/img/gps.png" alt="icono ubicación"> ubicación</li>
+
+                    <li>
+                        <!-- <img class="img_contacto" src="./assets/img/telefono.png" alt="icono teléfono"> -->
+                        Telefono: {{cv.personal_info.telefono1 }}{% if cv.personal_info.telefono2 %}
+                        - {{ cv.personal_info.telefono2 }}{% endif %}
+                    </li>
+
+                    <li>
+                        <!-- <img class="img_contacto" src="./assets/img/email.png" alt="icono email"> -->
+                        Email: {{ cv.personal_info.email_profesional1 }}{% if cv.personal_info.email_profesional2 %}
+                        - {{ cv.personal_info.email_profesional2 }}{% endif %}
+                    </li>
+
+                    {% if cv.social_network.linkedin %}
+                    <li>
+                        <!-- <img class="img_contacto" src="./assets/img/linkedin.png" alt="icono LinkedIn"> -->
+                        Linkedin: {{cv.social_network.linkedin }}
+                    </li>
+                    {% endif %}
+
+                    {% if cv.social_network.github %}
+                    <li>GitHub: {{ cv.social_network.github }}</li>
+                    {% endif %}
+                    {% if cv.social_network.portfolio %}
+                    <li>Portfolio: {{ cv.social_network.portfolio }}</li>
+                    {% endif %}
+                    {% if cv.social_network.twitter %}
+                    <li>Twitter/X: {{ cv.social_network.twitter }}</li>
+                    {% endif %}
+
+                    <li>
+                        <!-- <img class="img_contacto" src="./assets/img/gps.png" alt="icono ubicación"> -->
+                        CP {{ cv.personal_info.codigo_postal }}, {{cv.personal_info.ciudad }}, {{ cv.personal_info.pais
+                        }}
+                    </li>
+
+                    {% if cv.personal_info.fecha_nacimiento %}
+                    <li>Fecha nacimiento: {{ cv.personal_info.fecha_nacimiento }}</li>
+                    {% endif %}
+                    {% if cv.personal_info.nacionalidad %}
+                    <li>Nacionalidad: {{ cv.personal_info.nacionalidad }}</li>
+                    {% endif %}
+                    {% if cv.personal_info.carnet_conducir is not None %}
+                    <li>Carnet conducir: {{ cv.personal_info.carnet_conducir|yesno:"Si,No" }}</li>
+                    {% endif %}
+                    {% if cv.personal_info.disponibilidad %}
+                    <li>Disponibilidad: {{ cv.personal_info.disponibilidad }}</li>
+                    {% endif %}
+
                 </ul>
 
 
                 <div class="info-container hidden" id="sobre_mi">
                     <h3>Sobre mí</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis aliquam tempora quasi
-                        asperiores,
-                        quod eligendi illo atque, laboriosam a facilis totam necessitatibus labore perferendis sit.
-                        Culpa
-                        hic nihil labore corporis!</p>
+                    <p>{{ cv.professional_profile.resumen }}</p>
                 </div>
 
                 <div class="info-container hidden" id="tarjeta_exp">
                     <h3>EXPERIENCIA</h3>
+                    {% for item in cv.work_experience %}
                     <div class="titulo_sub">
-                        <h5 class="duracion">nov - 2025</h5>
-                        <h4>Lorem ipsum dolor</h4>
-                        <h5>Lorem</h5>
+                        <h5 class="duracion">{{ item.fecha_inicio }}{% if item.fecha_fin %} - {{ item.fecha_fin }}{%
+                            endif %}</h5>
+                        <h4>{{ item.puesto }}</h4>
+                        <h5>{{ item.empresa }}</h5>
 
                     </div>
-                    <ul>
-                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, velit.</li>
-                        <li>Temporibus corporis mollitia fugit in sapiente voluptas. At, atque odio?</li>
-                        <li>Nisi dolor facere maiores labore porro quibusdam laborum sequi tenetur.</li>
-                        <li>In nisi corrupti quos hic harum odit sunt aperiam amet.</li>
-                        <li>Dolor consequuntur expedita odio minima iure omnis! Sequi, veniam in!</li>
-                        <li>Facilis eos consequatur vero totam et, eum molestias rerum eligendi.</li>
-                    </ul>
+                    <p>
+                        {{ item.descripcion }}
+                        {% if item.logros %}
+                        <strong>Logros:</strong> {{ item.logros }}
+                        {% endif %}
+                    </p>
+                    {% endfor %}
                 </div>
 
                 <div class="info-container hidden" id="tarjeta_educacion">
                     <h4>EDUCACIÓN</h4>
+                    {% for item in cv.education %}
                     <div class="educacion">
-                        <h5>Lorem ipsum dolor</h5>
-                        <h6>lorem ipsum dolor</h6>
+                        <h5>{{ item.titulo }}</h5>
+                        <h6>{{ item.centro }}</h6>
+                        {% if item.ubicacion %}
+                        <h6>{{ item.ubicacion }}</h6>
+                        {% endif %}
+                        <h6>{{ item.fecha_inicio }}{% if item.fecha_fin %} | {{ item.fecha_fin }}{% endif %}</h6>
                     </div>
-                    <div class="educacion">
-                        <h5>Lorem ipsum dolor</h5>
-                        <h6>lorem ipsum dolor</h6>
-                    </div>
+                    {% endfor %}
+
                 </div>
 
                 <ul class="info-container hidden" id="habilidades">
                     <h3>Habilidades</h3>
-                    <li>Inglés: xxxxxx</li>
-                    <li>Catalán: xxxxx</li>
-                    <li>Liderazgo: xxxxx</li>
-                    <li>Trabajo en equipo: xxxxx</li>
-                    <li>Negociación: xxxxx</li>
+                    {% for skill in cv.skills %}
+                    <li>
+                        {{ skill.tipo }}
+                        {% if skill.categoria %} | {{ skill.categoria }}{% endif %}
+                        | {{ skill.nombre }}
+                        {% if skill.nivel %} | Nivel {{ skill.nivel }}{% endif %}
+                    </li>
+                {% endfor %}
                 </ul>
             </div>
         </div>

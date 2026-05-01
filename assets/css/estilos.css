@@ -13,10 +13,9 @@ body{
 
 .main{
     display: flex;
-    width: 600px;
-    height: 800px;
+    width: 60vw;
     border: grey solid 2px;
-    margin: 0 400px 0; 
+    margin: 0 20vw 0; 
 }
 
 .foto_cv{
@@ -30,7 +29,6 @@ body{
     display: flex;
     flex-direction: column;
     width: 40%;
-    height: 100%;
     background-color: #FFF1F2;
     padding-left: 15px;
     padding-top: 20px;
@@ -73,7 +71,7 @@ body{
 
 #contenido {
     display: flex;
-    margin-top: 50%;
+    margin-top: 5vh;
 }
 
 .boton_info{
