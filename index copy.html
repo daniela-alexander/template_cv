@@ -5,7 +5,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CV - {{ cv.personal_info.nombre }} {{ cv.personal_info.apellidos }}</title>
-    <link rel="stylesheet" href="./assets/css/estilos.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Nunito", sans-serif;
+        }
+
+        .main {
+            display: flex;
+            width: 60vw;
+            border: grey solid 2px;
+            margin: 0 20vw 0;
+        }
+
+        .foto_cv {
+            width: 200px;
+            height: 200px;
+            border-radius: 100px;
+            border: #CE9CB3 solid 2px;
+        }
+
+        .columna-izquierda {
+            display: flex;
+            flex-direction: column;
+            width: 40%;
+            background-color: #FFF1F2;
+            padding-left: 15px;
+            padding-top: 20px;
+        }
+
+        .columna-derecha {
+            display: flex;
+            flex-direction: column;
+            width: 60%;
+            height: 100%;
+            padding: 20px;
+        }
+
+        .presentacion {
+            margin-top: 20%;
+        }
+
+        .data {
+            display: flex;
+            flex-direction: column;
+            list-style: none;
+            gap: 30px;
+            margin-top: 5vh;
+
+        }
+
+        .img_contacto {
+            width: 20px;
+            height: 20px;
+        }
+
+        .duracion {
+            float: right;
+            padding-right: 15px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        #contenido {
+            display: flex;
+            margin-top: 5vh;
+        }
+
+        .boton_info {
+            text-decoration: none;
+            color: #ab8295;
+            font-size: 1.3rem;
+        }
+
+        .boton_info:hover {
+            color: #cb6096;
+        }
+
+        .active {
+            color: #b7256e;
+        }
+    </style>
 </head>
 
 <body>
@@ -65,7 +155,8 @@
 
                     <li>
                         <!-- <img class="img_contacto" src="./assets/img/gps.png" alt="icono ubicación"> -->
-                        CP {{ cv.personal_info.codigo_postal }}, {{cv.personal_info.ciudad }}, {{ cv.personal_info.pais }}
+                        CP {{ cv.personal_info.codigo_postal }}, {{cv.personal_info.ciudad }}, {{ cv.personal_info.pais
+                        }}
                     </li>
 
                     {% if cv.personal_info.fecha_nacimiento %}
@@ -132,13 +223,33 @@
                         | {{ skill.nombre }}
                         {% if skill.nivel %} | Nivel {{ skill.nivel }}{% endif %}
                     </li>
-                {% endfor %}
+                    {% endfor %}
                 </ul>
             </div>
         </div>
 
     </main>
-    <script src="./assets/js/main.js"></script>
+    <script>
+        let botones = document.querySelectorAll('.boton_info');
+        let infoContainers = document.querySelectorAll('.info-container');
+
+        botones.forEach(function (botonInfo) {
+            botonInfo.addEventListener('click', function () {
+                const target = botonInfo.getAttribute("data-target");
+                const info = document.getElementById(target);
+                infoContainers.forEach(function (container) {
+                    container.classList.add('hidden');
+                })
+                info.classList.remove('hidden');
+
+                botones.forEach(function (boton) {
+                    boton.classList.remove('active');
+                })
+                botonInfo.classList.add('active');
+
+            })
+        })
+    </script>
 </body>
 
 </html>
